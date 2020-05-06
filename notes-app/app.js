@@ -1,10 +1,8 @@
+const getNotes = require('./notes')
 
-// CHALLENGE 
-//
-// 1. CREATE A NEW FILE CALLED NOTES.JS
-// 2. CREATE GETNOTES FUNCTION THAT RETURNS "YOUR NOTES..."
-// 3. EXPORT GETNOTES FUNCTION
-// 4. FROM APP,JS, LOAD IN AND CALL THE FUNCTION PRINTING MESSAGE TO CONSOLE
+const msg = getNotes()
+console.log(msg)
+
 
 
 
