@@ -1,1 +1,14 @@
-false.writeFileSync()
+
+// CHALLENGE 
+//
+// 1. CREATE A NEW FILE CALLED NOTES.JS
+// 2. CREATE GETNOTES FUNCTION THAT RETURNS "YOUR NOTES..."
+// 3. EXPORT GETNOTES FUNCTION
+// 4. FROM APP,JS, LOAD IN AND CALL THE FUNCTION PRINTING MESSAGE TO CONSOLE
+
+
+
+
+// const guy = require('./utils')
+// const sum = guy(5, 10)
+// console.log(sum)
