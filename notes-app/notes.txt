@@ -1,1 +1,0 @@
-My name is Damien. I am a javaScript developer who is learning node to become a fullstack developer.

@@ -1,23 +1,57 @@
 const chalk = require('chalk')
-const getNotes = require('./notes')
+const yargs = require('yargs')
+const getNotes = require('./notes.js')
 
-const msg = getNotes()
-console.log(msg)
+// Customize yargs version
+yargs.version('1.1.0')
 
+// Create add command
+yargs.command({
+    command: 'add',
+    describe: 'Add a new note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            describe: 'Note body',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
+        console.log('Title: ' + argv.title)
+        console.log('Body: ' + argv.body)
+    }
+})
 
+// Create remove command
+yargs.command({
+    command: 'remove',
+    describe: 'Remove a note',
+    handler: function () {
+        console.log('Removing the note')
+    }
+})
 
+// Create list command
+yargs.command({
+    command: 'list',
+    describe: 'List your notes',
+    handler: function () {
+        console.log('Listing out all notes')
+    }
+})
 
-// CHALLENGE USE THE CHALK LIBRARY IN YOUR PROJECT
-// 1. INSTALL VERSION 2.4.2 OF CHALK done
+// Create read command
+yargs.command({
+    command: 'read',
+    describe: 'Read a note',
+    handler: function () {
+        console.log('Reading a note')
+    }
+})
 
-// 2. LOAD CHALK INTO APP.JS done
-
-// 3. USE IT TO PRINT THE STRING "SUCCESS!" TO THE CONSOLE IN GREEN done
-console.log(chalk.green('success!'))
-console.log(chalk.green.bold('success!'))
-console.log(chalk.green.bold.inverse('success!'))
-// 4. TEST YOUT WORK done
-
-// BONUS: USE DOCS TO MESS AROUND WITH OTHER STYLES. MAKE TEXT BOLD AND INVERSES
-
-
+yargs.parse()
