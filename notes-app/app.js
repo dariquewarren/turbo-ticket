@@ -53,3 +53,4 @@ yargs.command({
     }
 })
 
+yargs.parse()
