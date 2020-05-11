@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const getNotes = function () {
     return 'Your notes...'
 }
-
+// this adss notes to json file if noduplicate exists theere already
 const addNote = function (title, body) {
 const notes = loadNotes()
 const duplicateNotes = notes.filter(function (note){
