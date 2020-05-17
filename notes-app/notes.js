@@ -2,6 +2,10 @@ const fs = require('fs')
 const chalk = require('chalk')
 
 
+
+const getNotes = function () {
+    return 'Your notes...'
+}
 // loads json object, adds keys and values to an array, that array is saved in the notes.json file via savenotes function
 const addNote = function (title, body) {
 const notes = loadNotes()
@@ -73,6 +77,7 @@ saveNotes(keptNotes)
 
 
 module.exports = {
+    getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote
 }
