@@ -3,8 +3,15 @@ const chalk = require('chalk')
 
 
 
-const getNotes = function () {
-    return 'Your notes...'
+const readNotes = function (title) {
+    const dataBuffer = fs.readFileSync('notes.json')
+    const dataJSON = dataBuffer.toString()
+    const readObject = JSON.parse(dataJSON)
+    const noteFound = readObject.filter((e)=>{
+        return e.title === title
+    })
+    return `${noteFound[0].title} wrote the following--> ${noteFound[0].body} `
+    
 }
 // loads json object, adds keys and values to an array, that array is saved in the notes.json file via savenotes function
 const addNote = function (title, body) {
@@ -72,7 +79,7 @@ saveNotes(keptNotes)
 
 
 module.exports = {
-    getNotes: getNotes,
+    readNotes: readNotes,
     addNote: addNote,
     removeNote: removeNote,
     loadNotes: loadNotes
