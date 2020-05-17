@@ -2,10 +2,7 @@ const chalk = require('chalk')
 const yargs = require('yargs')
 const notes = require('./notes.js')
 
-// CHALLENGE: use chalk to provide useful logs for remove
-//
-// 1. if a note is removed, print "note removed!" with a green background
-// 2. if no note was removes, print 'no note found' with a red background
+
 
 
 
@@ -54,7 +51,7 @@ yargs.command({
     command: 'list',
     describe: 'List your notes',
     handler: function () {
-        console.log('Listing out all notes')
+        console.log(notes.loadNotes())
     }
 })
 
