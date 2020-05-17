@@ -33,7 +33,8 @@ const saveNotes = function(notes){
     fs.writeFileSync('notes.json', dataJSON)
 }
 
-
+// loads notes.json file and parses it into a useable array of objects.  
+// addnote and remove note both rely on it to do their jobs.
 const loadNotes = function(){
    try  {
 const dataBuffer = fs.readFileSync('notes.json')
@@ -68,12 +69,6 @@ if (keptNotes.length !== notes.length) {
 saveNotes(keptNotes)
 
 }
-
-
-
-
-
-
 
 
 module.exports = {
