@@ -44,7 +44,7 @@ const dataBuffer = fs.readFileSync('notes.json')
             }
    
 }
-// loads notes object via the loadnotes function, creates an array, 
+// loads a notes object via the loadnotes function, creates an array, 
 //pushes all keyvalue pairs EXCEPT for note matching title parameter thats called 
 // replaces original json object with new array as the json object, effectively deleting note
 const removeNote = function(title){
