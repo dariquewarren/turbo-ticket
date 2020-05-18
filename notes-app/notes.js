@@ -2,9 +2,18 @@ const fs = require('fs')
 const chalk = require('chalk')
 
 
-
-const getNotes = function () {
-    return 'Your notes...'
+// loads notes.json file, parses it into a useable array of objects then,
+// filters through the array of objects for matches to the title parameter then,
+// returns a template literal with the title as well as the body in it
+const readNote = function (title) {
+    const dataBuffer = fs.readFileSync('notes.json')
+            const dataJSON = dataBuffer.toString()
+            const allNotes = JSON.parse(dataJSON)
+            const retrieveNote = allNotes.filter((e)=>{
+               return e.title === title
+            })
+    return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}` 
+    
 }
 // loads json object, adds keys and values to an array, that array is saved in the notes.json file via savenotes function
 const addNote = function (title, body) {
@@ -72,7 +81,7 @@ saveNotes(keptNotes)
 
 
 module.exports = {
-    getNotes: getNotes,
+    readNote: readNote,
     addNote: addNote,
     removeNote: removeNote,
     loadNotes: loadNotes
