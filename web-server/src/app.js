@@ -1,36 +1,44 @@
+const path = require('path')
 const express = require('express')
 
+// turns expressfunction into a usable variable
 const app = express()
-// uses express' get method to send a response to the page specified by quotes.
-// empty quotes seems to mean root folder of 
-// res.send sends whatever it's called with to the page specified by the function
-app.get('', (req, res)=> {
-    res.send('<h1>Weather</h1>')
-})
+// creates a variable that represents file path FOR OUBLIC DIRECTORY
+const publicDirectoryPath = path.join(__dirname, '../public')
+// loads static page via the exoress method 'get' and exoress method 'static'
+app.use(express.static(publicDirectoryPath))
 
-app.get('/help', (req, res)=>{
-    res.send([{
-        name: 'darique',
-        age: 31
-    }] )
-})
+
+
+
 
 
 /* 
 
-GOAL: UPDATE ROUTES
+GOAL: CREATE TWO MORE HTML FILES
 
-1. SETUP ABOUT ROUTE TO RENDER A TITLE WITH HTML
-2. SETUP A WEATHER ROUTE TO SEND BACK json
-    - OBJECT WITH FORECAST AND LOCATION STRINGS
-3. TEST YOUR WORK BY VISITING BOTH IN THE BROWSER
+1. CREATE A HTML PAGE FOR ABOUT WITH "ABOUT" TITLE
+2. CREATE A HTML PAGE FOR HELO WITH "HELP" TITLE
+3. REMOVE THE OLD ROUTE HANDLERS FOR BOTH
+4. VISIT BOTH IN THE BROWSER TO TEST YOUR WORK
+
+
+
+// creates a variable that represents file path FOR OUBLIC DIRECTORY
+const helpPagePath = path.join(__dirname, '../public')
+// loads static page via the express method 'get' and exoress method 'static'
+app.use(express.static(helpPagePath))
+
+
+
+
+// creates a variable that represents file path FOR OUBLIC DIRECTORY
+const aboutPagePath = path.join(__dirname, '../public')
+// loads static page via the express method 'get' and express method 'static'
+app.use(express.static(helpPagePath))
+
 
 */
-app.get('/about', (req, res)=>{
-    res.send('<h3>ABOUT OUR TEAM<h3>')
-})
-
-
 
 
 app.get('/weather', (req, res)=>{
