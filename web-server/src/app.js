@@ -1,18 +1,19 @@
 const path = require('path')
 const express = require('express')
-
-// turns expressfunction into a usable variable
+const hbs =require('hbs')
 const app = express()
 
-
-// creates a variable that represents file path FOR OUBLIC DIRECTORY
+//DEFINE PATHS FOR EXPRESS CONFIG
 const publicDirectoryPath = path.join(__dirname, '../public')
-
-
-// loads static page via the exoress method 'get' and exoress method 'static'
-app.use(express.static(publicDirectoryPath))
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
+// SETS UP HANDLEBARS ENGINE AND VIEWS LOCATION
 
 app.set('view engine','hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+// SETUP STATIC DIRECTORY TO SERVE
+app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res)=>{
     res.render('index', {
@@ -28,19 +29,13 @@ app.get('/about', (req, res)=>{
     })
 })
 
-/* 
-GOAL: CREATE A TEMPLATE FOR HELP PAGE
 
-1. SETUP A HELP TEMPLATE TO RENDER A HELP MESSAGE TO THE SCREEN 
-2. SETUP THE HELP ROUTE AND RENDER THE TEMPLATE WITH AN EXAMPLE MESSAGE
-3. VISIT THE ROUTE IN THE BROWSER AND SEE YOUR HELP MESSAGE PRINT
-
-*/
 
 app.get('/help', (req, res)=>{
 res.render('help', {
-    title:'HEEEEEEELLLLLLPPPP IS BELOW',
-    helpMessage: 'These are not the droids you are looking for'
+    helpMessage: 'These are not the droids you are looking for',
+    title:'Help',
+    name: 'Darique Warren'
 })
 })
 
@@ -53,6 +48,13 @@ app.get('/weather', (req, res)=>{
  })
 
 
+/* 
+GOAL: CREATE A PARTIAL FOR THE FOOTER
+1. SETUP THE TEMPLATE FOR THE FOOTER PARTIAL "CREATED BY SOME NAME"
+2. RENDER THE PARTUAL AT THE BOTTOM OF ALL THREE PAGES
+3. TEST YOUR WORK BY VISITING ALL THREE PAGES
+
+*/ 
 
 
 app.listen(3000, ()=>{
