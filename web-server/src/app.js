@@ -29,8 +29,6 @@ app.get('/about', (req, res)=>{
     })
 })
 
-
-
 app.get('/help', (req, res)=>{
 res.render('help', {
     helpMessage: 'These are not the droids you are looking for',
@@ -48,14 +46,31 @@ app.get('/weather', (req, res)=>{
  })
 
 
+app.get('/help/*', (req, res)=>{
+    res.render('404', {
+        errorMessage: 'HELP ARTICLE NOT FOUND',
+        title: '404',
+        name: ' Darique Warren'
+    })
+})
+
+app.get('*', (req, res)=>{
+    res.render('404', {
+        errorMessage: 'PAGE NOT FOUND',
+        title: '404',
+        name: ' Darique Warren'
+    })
+})
 /* 
-GOAL: CREATE A PARTIAL FOR THE FOOTER
-1. SETUP THE TEMPLATE FOR THE FOOTER PARTIAL "CREATED BY SOME NAME"
-2. RENDER THE PARTUAL AT THE BOTTOM OF ALL THREE PAGES
-3. TEST YOUR WORK BY VISITING ALL THREE PAGES
+GOAL: CREATE AND RENDER A 404 PAGE WITH HANDLEBARS
+1-SETUP THE TEMPLATE TO RENDER THE HEADER AND FOOTER
+2- SETUP THE TEMPLATE TO RENDER AN ERROR MESSAGE IN A <P>
+3-RENDER THE TEMPLATE FOR BOTH 404 ROUTES
+    - PAGE NOT FOUND
+    - HELP ARTICLE NOT FOUND
+    3-TEST YOUR WORK. VISIT /WHAT AND /HELP/UNITS
 
-*/ 
-
+*/
 
 app.listen(3000, ()=>{
     console.log('server is up on port 3000')
