@@ -9,7 +9,7 @@ const notes = require('./notes.js')
 // Customize yargs version
 yargs.version('1.1.0')
 
-// Create add command
+// adds object with title/body keys and custom value
 yargs.command({
     command: 'add',
     describe: 'Add a new note',
@@ -30,7 +30,7 @@ yargs.command({
     }
 })
 
-// Create remove command
+// filters key/value pairs by the title key. removes title and body of resulting notes
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
@@ -46,7 +46,7 @@ yargs.command({
     }
 })
 
-// Create list command
+// shows all the notes within notes.json file
 yargs.command({
     command: 'list',
     describe: 'List your notes',
@@ -55,7 +55,7 @@ yargs.command({
     }
 })
 
-// Create read command
+// returns body value attached to the title key requested
 yargs.command({
     command: 'read',
     describe: 'Read a note',
@@ -64,5 +64,6 @@ yargs.command({
         console.log(notes.readNotes(argv.title))  
     }
 })
-
+// i need to find out exactly what this does, not sure enough to explain it. 
+// i think it takes all the commands and makes them usable within the command line.i THINK
 yargs.parse()
