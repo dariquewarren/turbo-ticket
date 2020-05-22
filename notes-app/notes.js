@@ -1,7 +1,7 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-
+// CONSIDER ADDING AN UPDATE FUNCTION
 
 const readNotes = function (title) {
     const dataBuffer = fs.readFileSync('notes.json')
