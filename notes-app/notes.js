@@ -2,17 +2,30 @@ const fs = require('fs')
 const chalk = require('chalk')
 
 
+
+
+
 // loads notes.json file, parses it into a useable array of objects then,
 // filters through the array of objects for matches to the title parameter then,
 // returns a template literal with the title as well as the body in it
+
+
 const readNote = function (title) {
-    const dataBuffer = fs.readFileSync('notes.json')
+    if (title) {
+         const dataBuffer = fs.readFileSync('notes.json')
             const dataJSON = dataBuffer.toString()
             const allNotes = JSON.parse(dataJSON)
             const retrieveNote = allNotes.filter((e)=>{
                return e.title === title
             })
-    return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}` 
+
+             return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}`
+    } else {
+           
+    }
+    
+   console.log(chalk.red.inverse('STRING IS REQUIRED'))
+    
     
 }
 // loads json object, adds keys and values to an array, that array is saved in the notes.json file via savenotes function
