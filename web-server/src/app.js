@@ -2,7 +2,8 @@ const path = require('path')
 const express = require('express')
 const hbs =require('hbs')
 const app = express()
-
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 //DEFINE PATHS FOR EXPRESS CONFIG
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -43,25 +44,51 @@ app.get('/weather', (req, res)=>{
         return res.send({
             error: 'please provide an address'
         })
+    } else {
+        geocode(req.query.address, (error, {latitude, longitude, location})=>{
+            if (!req.query.address) {
+                return res.send({
+                    error: error
+                })
+            }
+    
+            forecast(latitude, longitude, (error, {description, temperature, precipitation}) => {
+                if (error) {
+                    return res.send({
+                        error: error
+                    })
+                
+                }else {
+                    
+                    res.send( {
+            forecast: `${description}. It is currently ${temperature} degrees out with ${precipitation}% chance of rain`,
+            location: location,
+            address: req.query.address
+        })
+                }
+            
+    
+                
+            })
+        })
+
+        
+
     }
+
+
     
     
-    res.send( {
-        forecast: 'It is weather',
-        location: 'It is here',
-        address: req.query.address
-    })
+    
  })
 
 
 
- /* GOAL: UPDATE WEATHER ENDPOINT TO ACCEPT ADDRESS
- 
- 1. NO ADDRESS? SEND BACK AN ERROR MESSAGE
- 2. ADDRESS? SEND BACK THE STATIC JSON
-    --- ADD ADDRESS PROPERTY ONTO  JSON WHICH RETURNS THE PROVIDED ADDRESS
- 3. TEST /WEATHER AND /WEATHER?ADDRESS=PHILADELPHIA
- 
+ /* GOAL: WIRE UP / WEATHER
+ 1. REQUIRE GEOCODE/FORECAST INTO APP.JS
+ 2. USE THE ADDRESS TO GEOCODE
+ 3.USE THE COORDINATES TO GET FORECAST
+ 4. SEND BACK THE REAL FORECAST AND LOCATION
  */
  app.get('/products', (req, res)=>{
      if (!req.query.search) {

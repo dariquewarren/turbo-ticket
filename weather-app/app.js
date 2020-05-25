@@ -12,13 +12,13 @@ if (!address) {
             return console.log(error)
         }
 
-        forecast(latitude, longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (error, {description, temperature, precipitation}) => {
             if (error) {
                 return console.log(error)
             }
-
+            
             console.log(location)
-            console.log(forecastData)
+            console.log(description + ' It is currently ' + temperature + ' degress out. There is a ' + precipitation + '% chance of rain.', undefined))
         })
     })
 }
