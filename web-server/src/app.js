@@ -39,12 +39,41 @@ res.render('help', {
 
 
 app.get('/weather', (req, res)=>{
+    if(!req.query.address){
+        return res.send({
+            error: 'please provide an address'
+        })
+    }
+    
+    
     res.send( {
         forecast: 'It is weather',
-        location: 'It is here'
+        location: 'It is here',
+        address: req.query.address
     })
  })
 
+
+
+ /* GOAL: UPDATE WEATHER ENDPOINT TO ACCEPT ADDRESS
+ 
+ 1. NO ADDRESS? SEND BACK AN ERROR MESSAGE
+ 2. ADDRESS? SEND BACK THE STATIC JSON
+    --- ADD ADDRESS PROPERTY ONTO  JSON WHICH RETURNS THE PROVIDED ADDRESS
+ 3. TEST /WEATHER AND /WEATHER?ADDRESS=PHILADELPHIA
+ 
+ */
+ app.get('/products', (req, res)=>{
+     if (!req.query.search) {
+      return  res.send({
+            error: 'you must provide a search term'
+        })
+     }
+   console.log(req.query.search)
+    res.send({
+        products: []
+    })
+ })
 
 app.get('/help/*', (req, res)=>{
     res.render('404', {
