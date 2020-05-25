@@ -17,5 +17,5 @@ const geocode = (address, callback) => {
         }
     })
 }
-// pk.eyJ1IjoiZGFyaXF1ZXciLCJhIjoiY2thYnp4YWdyMDdodDMxbXcwOGsxcnA2ciJ9.XEueTGOscJKBKl1IZZiOiQ
+
 module.exports = geocode

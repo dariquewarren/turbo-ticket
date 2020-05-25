@@ -9,8 +9,11 @@ const url =  `http://api.weatherstack.com/current?access_key=9fdf17fc0144d6830d2
         } else if (body.error) {
             callback('Unable to find location', undefined)
         } else {
-            callback( body.current.weather_descriptions + ' It is currently ' + body.current.temperature + ' degress out. There is a ' + body.current.precip + '% chance of rain.', undefined)
-        }
+            callback( undefined, {
+                description: body.current.weather_descriptions ,
+                temperature: body.current.temperature,
+                precipitation: body.current.precip
+            })    }
     })
 }
 
