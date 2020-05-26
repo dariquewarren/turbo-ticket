@@ -1,3 +1,5 @@
+
+
 console.log('client side java is loaded')
 
 fetch('http://puzzle.mead.io/puzzle').then((response)=>{
@@ -5,15 +7,17 @@ fetch('http://puzzle.mead.io/puzzle').then((response)=>{
         console.log(data)
     })
 })
-const locationTest = 'Harlem'
-fetch(`http://api.mapbox.com/geocoding/v5/mapbox.places/${locationTest}.json?access_token=pk.eyJ1IjoiZGFyaXF1ZXciLCJhIjoiY2thYnp4YWdyMDdodDMxbXcwOGsxcnA2ciJ9.XEueTGOscJKBKl1IZZiOiQ&limit=1`).then((response)=> {
+const locationTest = 'boston'
+fetch(`http://localhost:3000/weather?address=harlem`).then((response)=> {
     response.json().then((data)=>{
-        
-                 
-        console.log(data.features[0].center[1])
-         console.log(data.features[0].center[0])
-    })
+       if(data.error) {
+           console.log(data.error)
+       }
+       
+       console.log(data.location)
+       console.log(data.forecast)
 })
+})  
 /*
 
 GOAL: FETCH WEATHER!
