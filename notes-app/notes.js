@@ -9,22 +9,35 @@ const chalk = require('chalk')
 // filters through the array of objects for matches to the title parameter then,
 // returns a template literal with the title as well as the body in it
 
+/*
+This does not handle the case when:
+User mistypes the title (it throws an exception).
 
+I suggest you add a check for the retreiveNote variable. Since .filter returns an array, you can check if the array length is greater than 0 (ie your filter function found at least 1 match).
+Something like:
+if (retrieveNote.length > 0 )
+{
+return The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}
+}
+
+*/
 const readNote = function (title) {
-    if (title) {
-         const dataBuffer = fs.readFileSync('notes.json')
+   
+          const dataBuffer = fs.readFileSync('notes.json')
             const dataJSON = dataBuffer.toString()
             const allNotes = JSON.parse(dataJSON)
             const retrieveNote = allNotes.filter((e)=>{
-               return e.title === title
+               return e.title.toLowerCase() === title.toLowerCase()
             })
-
-             return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}`
-    } else {
-           
-    }
+                        
+   if(retrieveNote.length > 0){
+    return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}`
+}else {
+    console.log(chalk.inverse('TITLE NOT FOUND. CHECK SPELLING AND CaSe AND TRY AGAIN'))
+}
+   
     
-   console.log(chalk.red.inverse('STRING IS REQUIRED'))
+  
     
     
 }
