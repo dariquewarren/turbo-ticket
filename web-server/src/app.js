@@ -1,12 +1,12 @@
 const path = require('path')
 const express = require('express')
-const hbs =require('hbs')
-const app = express()
-const port = process.env.PORT || 3000
-
+const hbs = require('hbs')
 
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+
+const app = express()
+const port = process.env.PORT || 3000
 //DEFINE PATHS FOR EXPRESS CONFIG
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -126,6 +126,6 @@ GOAL: CREATE AND RENDER A 404 PAGE WITH HANDLEBARS
 
 */
 
-app.listen(3000, ()=>{
-    console.log('server is up on port 3000')
+app.listen(port, ()=>{
+    console.log('server is up on port 3000' + port)
 })
