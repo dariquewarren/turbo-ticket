@@ -7,15 +7,17 @@ const forecast = require('./utils/forecast')
 
 const app = express()
 const port = process.env.PORT || 3000
+
 //DEFINE PATHS FOR EXPRESS CONFIG
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
-// SETS UP HANDLEBARS ENGINE AND VIEWS LOCATION
 
+// SETS UP HANDLEBARS ENGINE AND VIEWS LOCATION
 app.set('view engine','hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
+
 // SETUP STATIC DIRECTORY TO SERVE
 app.use(express.static(publicDirectoryPath))
 
@@ -82,12 +84,7 @@ app.get('/weather', (req, res)=>{
 
 
 
- /* GOAL: WIRE UP / WEATHER
- 1. REQUIRE GEOCODE/FORECAST INTO APP.JS
- 2. USE THE ADDRESS TO GEOCODE
- 3.USE THE COORDINATES TO GET FORECAST
- 4. SEND BACK THE REAL FORECAST AND LOCATION
- */
+
  app.get('/products', (req, res)=>{
      if (!req.query.search) {
       return  res.send({
@@ -115,16 +112,7 @@ app.get('*', (req, res)=>{
         name: ' Darique Warren'
     })
 })
-/* 
-GOAL: CREATE AND RENDER A 404 PAGE WITH HANDLEBARS
-1-SETUP THE TEMPLATE TO RENDER THE HEADER AND FOOTER
-2- SETUP THE TEMPLATE TO RENDER AN ERROR MESSAGE IN A <P>
-3-RENDER THE TEMPLATE FOR BOTH 404 ROUTES
-    - PAGE NOT FOUND
-    - HELP ARTICLE NOT FOUND
-    3-TEST YOUR WORK. VISIT /WHAT AND /HELP/UNITS
 
-*/
 
 app.listen(port, ()=>{
     console.log('server is up on port 3000' + port)
