@@ -60,8 +60,7 @@ yargs.command({
     command: 'read',
     describe: 'Read a note',
     handler: function (argv) {
-        //argv.title
-        console.log(notes.readNotes(argv.title))  
+        console.log(notes.readNote(argv.title))
     }
 })
 // i need to find out exactly what this does, not sure enough to explain it. 

@@ -3,15 +3,25 @@ const chalk = require('chalk')
 
 // CONSIDER ADDING AN UPDATE FUNCTION
 
-const readNotes = function (title) {
-    const dataBuffer = fs.readFileSync('notes.json')
-    const dataJSON = dataBuffer.toString()
-    const readObject = JSON.parse(dataJSON)
-    const noteFound = readObject.filter((e)=>{
-        return e.title === title
-    })
-    return `${noteFound[0].title} wrote the following--> ${noteFound[0].body} `
-    
+
+// loads notes.json file, parses it into a useable array of objects then,
+// filters through the array of objects for matches to the title parameter then,
+// returns a template literal with the title as well as the body in it
+
+const readNote = function (title) {
+   
+          const dataBuffer = fs.readFileSync('notes.json')
+            const dataJSON = dataBuffer.toString()
+            const allNotes = JSON.parse(dataJSON)
+            const retrieveNote = allNotes.filter((e)=>{
+               return e.title.toLowerCase() === title.toLowerCase()
+            })
+                        
+   if(retrieveNote.length > 0){
+    return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}`
+}else {
+    console.log(chalk.inverse('TITLE NOT FOUND. CHECK SPELLING AND CaSe AND TRY AGAIN'))
+}   
 }
 // loads json object, adds keys and values to an array, that array is saved in the notes.json file via savenotes function
 const addNote = function (title, body) {
@@ -34,7 +44,7 @@ notes.push({
 
 }
 
-// converts notes object to a string and then writes it to notes.json file
+// converts notes object to a string and then writes it to the notes.json file
 const saveNotes = function(notes){
     const dataJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJSON)
@@ -79,7 +89,7 @@ saveNotes(keptNotes)
 
 
 module.exports = {
-    readNotes: readNotes,
+    readNote: readNote,
     addNote: addNote,
     removeNote: removeNote,
     loadNotes: loadNotes
