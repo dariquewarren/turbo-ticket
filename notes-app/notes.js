@@ -1,8 +1,7 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-
-
+// CONSIDER ADDING AN UPDATE FUNCTION
 
 
 // loads notes.json file, parses it into a useable array of objects then,
@@ -22,12 +21,7 @@ const readNote = function (title) {
     return `The note associated with ${title.toUpperCase()} is: ${retrieveNote[0].body}`
 }else {
     console.log(chalk.inverse('TITLE NOT FOUND. CHECK SPELLING AND CaSe AND TRY AGAIN'))
-}
-   
-    
-  
-    
-    
+}   
 }
 // loads json object, adds keys and values to an array, that array is saved in the notes.json file via savenotes function
 const addNote = function (title, body) {
