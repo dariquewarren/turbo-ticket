@@ -26,5 +26,3 @@ fetch(`/weather?address=${location}`).then((response)=> {
 })  
 console.log(location)
 })
-
-
