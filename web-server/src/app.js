@@ -57,7 +57,7 @@ app.get('/weather', (req, res)=>{
                 })
             }
     
-            forecast(latitude, longitude, (error, {description, temperature, precipitation}={}) => {
+            forecast(latitude, longitude, (error, {description, temperature, precipitation, humidity, feelsLike}={}) => {
                 if (error) {
                     return res.send({
                         error: error
@@ -66,7 +66,7 @@ app.get('/weather', (req, res)=>{
                 }else {
                     
                     res.send( {
-            forecast: `${description}. It is currently ${temperature} degrees out with ${precipitation}% chance of rain`,
+            forecast: ` Although it feels like ${feelsLike} degrees, it is ${temperature} degrees out and ${description} with ${humidity} humidity. There is a ${precipitation}% chance of rain.`,
             location: location,
             address: req.query.address
         })
@@ -113,7 +113,6 @@ app.get('*', (req, res)=>{
     })
 })
 
-
 app.listen(port, ()=>{
-    console.log('server is up on port 3000' + port)
+    console.log('server is up on port ' + port)
 })
