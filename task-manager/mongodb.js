@@ -46,4 +46,15 @@ if (error){
 }
     console.log(task)
 })
+
+db.collection('tasks').find({completed: false}, (error, task)=>{
+    if(error) {
+      console.log('unable to fetch')  
+    }
+
+console.log(task)
+
+})
+
+
 })
