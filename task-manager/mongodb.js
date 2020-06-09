@@ -10,5 +10,14 @@ if (error){
     return console.log('no db connect')
 }
 
-    console.log('connected rigt')
+  const db = client.db(databaseName)
+  db.collection('users').insertOne({
+      name: 'Darique',
+      age: 31
+  })
+
+  db.collection('users').insertOne({
+      occupation: 'Emcee',
+      alias: 'Delta Bravo'
+  })
 })
