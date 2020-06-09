@@ -11,6 +11,10 @@ const id = new ObjectID()
 const connectionUrl = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
+console.log(id.id.length)
+console.log(id.getTimestamp())
+console.log(id.toHexString().length)
+
 MongoClient.connect(connectionUrl, {useNewUrlParser: true}  , (error, client)=>{
 if (error){
     return console.log('no db connect')
@@ -18,7 +22,7 @@ if (error){
 
   const db = client.db(databaseName)
 //   db.collection('users').insertOne({
-//       name: 'Darique',
+//     name: 'jason',
 //       age: 31
 //   }, (error, result)=>{
 //     if (error){
