@@ -38,24 +38,25 @@ if (error){
 
 /*
 
-GOAL: INSERT THREE TASKS INTO A TASK COLLECTION
-
-1. USE INSERTMANY TO INSERT THREE DOCUMENTS
----- DESCRIPTION(STRING) AND COMPLETED(BOOLEAN)
-
-2. SETUP THE CALL BACK TO LOG ERROR OR PRINT OPS
-3. RUN THE SCRIPT
-4. REFRESH THE DATABASE IN ROBO 3T AND VIEW THE DATA IN TASKS COLLECTION
-*/
 
 
-db.collection('tasks').insertMany([{}, {}], (error, result)=>{
+
+db.collection('tasks').insertMany([{
+    description: 'learn MongoDB',
+    completed: true
+}, {
+    description: 'Conquer Day',
+    completed: true 
+}, {
+    description: 'learn humility',
+    completed: false
+}],  (error, result)=>{
     if (error){
-        console.log('something wicked this way comes')
+     return   console.log('something wicked this way comes')
     }
 
+console.log(result.ops)
 
-    
 })
 
 
