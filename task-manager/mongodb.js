@@ -11,9 +11,7 @@ const id = new ObjectID()
 const connectionUrl = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
-console.log(id.id.length)
-console.log(id.getTimestamp())
-console.log(id.toHexString().length)
+
 
 MongoClient.connect(connectionUrl, {useNewUrlParser: true}  , (error, client)=>{
 if (error){
@@ -21,54 +19,12 @@ if (error){
 }
 
   const db = client.db(databaseName)
-//   db.collection('users').insertOne({
-//     name: 'jason',
-//       age: 31
-//   }, (error, result)=>{
-//     if (error){
-//         console.log('unable to insert user')
-//     }
+db.collection('users').findOne({_id: new ObjectID('5edfa5bffd3b2918e087b265')}, (error, user)=>{
+if(error) {
+    console.log('user error')
+}
 
-//         console.log(result.ops)
-// })
-
-// db.collection('users').insertMany([{
-//     name: 'jen',
-//     age: 25
-// }, {
-//     name: 'gunther',
-//     age: 50
-// }],(error, result)=>{
-//     if (error){
-//         console.log(error)
-//     }
-//     console.log(result.ops)
-// }) 
-
-
-/*
-
-
-
-
-db.collection('tasks').insertMany([{
-    description: 'learn MongoDB',
-    completed: true
-}, {
-    description: 'Conquer Day',
-    completed: true 
-}, {
-    description: 'learn humility',
-    completed: false
-}],  (error, result)=>{
-    if (error){
-     return   console.log('something wicked this way comes')
-    }
-
-console.log(result.ops)
-
+console.log(user)
 })
-
-*/
 
 })
