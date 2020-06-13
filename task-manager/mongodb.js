@@ -4,7 +4,9 @@
 // const MongoClient = mongodb.MongoClient
 // const ObjectID = mongodb.ObjectID
 
-const {MongoClient, ObjectID} = require('mongodb')
+
+// destructured mongodb! what excitement!
+const {MongoClient, ObjectID, DBRef} = require('mongodb')
 
 const id = new ObjectID()
 
@@ -19,39 +21,65 @@ if (error){
 }
 
   const db = client.db(databaseName)
-// db.collection('users').findOne({_id: new ObjectID('5edfa5bffd3b2918e087b265')}, (error, user)=>{
-// if(error) {
-//     console.log('user error')
-// }
-
-// console.log(user)
+// db.collection('users').deleteMany({age: 25}).then((result)=>{
+// console.log(result)
+// }).catch((error)=>{
+//     console.log(error)
 // })
 
-// db.collection('users').find({age: 31}).count((error, count)=>{
-//     console.log(count)
-// })
 
 /*
-GOAL 
-USE FIND AND FIND ONE WITH TASKS
-1. USE FIND ONE TO FETCH THE LAST TASK BY ID. PRINT TO CONSOLE
-2. USE FIND TO FETCH ALL TASLS THAT ARE NOT COMPLETED
-3. TEST YOUR WORK!
+GOAL: USE DELETEoNE TO REMOVE A TASK
+1. GRAB THE DESCRIPTION FOR THE TASK YOU WANT TO REMOVE
+2. SETUP THE CALL WITH THE QUERY
+3. USE PROMISE METHOD TO SET UP SUCCESS/FAILURE HANDLERS
+4. TEST YOUR WORK
 
-*/
+ */
 
-db.collection('tasks').findOne({_id: new ObjectID("5edfa9e104c6c335b46acfc3")}, (error, task) =>{
-if (error){
-    console.log('unable to fetch task')
-}
-    console.log(task)
-})
+//  db.collection('users').updateOne({name: "Darique"}, {$set: {
+//     age: 32
+// }}).then((result)=>{
+//      console.log(result)
+//  }).catch((error)=>{
+//      console.log(error)
+//  })
 
-db.collection('tasks').find({completed: false}).toArray((error, tasks)=>{
-if(error) {
-console.log('unable to fetch')
-}
-console.log(tasks)
-}) 
+// CREATE 
+// db.collection('members').insertOne({name: 'Darique Warren', rank:'Senior', privilege: 'medium'}).then((result)=>{
+// console.log(result)
+// }).catch((error)=>{
+// console.log(error)
+// })
+
+// READ
+// db.collection('members').findOne({_id: ObjectID("5ee2bd4a84a5da21f4c51a70")}).then((result)=>{console.log(result)
+// }).catch((error)=>{
+//     console.log(error)
+// })
+
+
+// UPDATE
+// db.collection('members').updateOne({
+// name: 'Darique Warren',
+
+// },{ $set: {
+//     name: 'Uncouth Jesus',
+//     rank: 'Not Applicable',
+//     privilege: 'Low'
+// }}).then((result)=>{
+// console.log(result)
+// }).catch((error)=>{
+// console.log(error)
+// })
+// })
+
+
+//  DELETE
+//  db.collection('members').deleteOne({name: 'Darique Warren'}).then((result)=>{console.log(result)
+// }).catch((error)=>{console.log(error)
+// })
+
+
 
 })
