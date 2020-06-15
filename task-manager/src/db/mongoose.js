@@ -58,40 +58,50 @@ throw new Error('Invalid Email')
        
         }
 })
-const me = new User({
-   name: 'Darique',
-   email: 'dwarrennyc@ddw.com    ',
-   password: ' ddwpasswordwarren    ',
-   age: 32
-})
+// const me = new User({
+//    name: 'Darique',
+//    email: 'dwarrennyc@ddw.com    ',
+//    password: ' ddwpasswordwarren    ',
+//    age: 32
+// })
 
-me.save().then(()=>{
-    console.log(me)
-}).catch((error)=>{
-    console.log('Error!', error)
-})
+// me.save().then(()=>{
+//     console.log(me)
+// }).catch((error)=>{
+//     console.log('Error!', error)
+// })
 
+/*
 
+GOAL: ADD VALIDATION AND SANITIZATION TO TASKS
+
+1. TRIM THE DESCRIPTION AND MAKE IT REQUIRED
+2. MAKE COMPETED REQUIRED AND SET IT TO DEFAULT FALSE
+3. TEST WORK WITH OR WITHOUT ERRORS
+*/
 
 const Tasks = mongoose.model('Tasks', {
  description: {
     type: String,
-    required: true
+    required: true,
+    trim: true
  },
 completed: {
     type: Boolean,
+    
+    default: false
     
     }
    
 })
 
-// const ddw = new Tasks({
-//     description: "master my life",
-//     completed: false
-// })
+const ddw = new Tasks({
+description: 'stop being awesome',
+    
+})
 
-// ddw.save().then(()=>{
-//     console.log(ddw)
-// }).catch(()=>{
-//     console.log('error', error)
-// })
+ddw.save().then(()=>{
+    console.log(ddw)
+}).catch(()=>{
+    console.log('error', error)
+})
