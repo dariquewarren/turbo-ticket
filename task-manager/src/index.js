@@ -25,7 +25,6 @@ User.find({}).then((users)=>{
     res.status(400).send})
 })
 
-
 app.get('/users/:id', (req, res)=>{
     const _id = req.params.id
 
@@ -50,13 +49,8 @@ app.post('/tasks', (req, res)=>{
     })
 })
 
-/*
-GOAL: SETUP THE TASK READING ENDPOINTS
 
-1. CREATE AN ENDPOINT FOR FETCHING ALL TASKS
-2. CREATE AN ENDPOINT FOR FETCHING ONE TASK BY ITS ID
-3. TEST YOUR WORK BY SETTING UP 2 NEW POSTMAN REQUESTS
- */
+
 app.get('/tasks', (req,res)=>{
     Tasks.find({}).then((task)=>{
         res.send(task)
