@@ -12,27 +12,77 @@ app.use(express.json())
 app.post('/users', (req, res)=>{
    const user = new User(req.body)
    user.save().then((user)=>{
-res.send(user)
+res.status(201).send(user)
    }).catch((error)=>{
        res.status(400).then(error)
 })
 })
 
+app.get('/users', (req, res)=>{
+User.find({}).then((users)=>{
+    res.send(users)
+}).catch((error)=>{
+    res.status(400).send})
+})
+
+
+app.get('/users/:id', (req, res)=>{
+    const _id = req.params.id
+
+  User.findById(_id).then((user)=>{
+    if (!user) {
+        // skips over and returns error status
+        return res.status(404).send()
+    }
+
+    res.send(user)
+  }).catch((e)=>{
+    res.status(500).send()
+  })
+})
+
 app.post('/tasks', (req, res)=>{
     const task = new Tasks(req.body)
     task.save().then((task)=>{
-        res.send(task)
+        res.status(201).send(task)
     }).catch((error)=>{
         res.status(400).then(error)
     })
 })
-/*
-GOAL: SETUP TASK CREATIO ENDPOINT
 
-1.CREATE A SEPERATE FILE FOR THE TASK MODEL(LOAD IT INTO INDEX.JS)
-2. CREATE THE TASK CREATION ENDPOINT(HANDLE SUCCESS AND ERROR)
-3. TEST YOUR WORK FROM POSTMAN WITH GOOD AND BAD DATA
-*/
+/*
+GOAL: SETUP THE TASK READING ENDPOINTS
+
+1. CREATE AN ENDPOINT FOR FETCHING ALL TASKS
+2. CREATE AN ENDPOINT FOR FETCHING ONE TASK BY ITS ID
+3. TEST YOUR WORK BY SETTING UP 2 NEW POSTMAN REQUESTS
+ */
+app.get('/tasks', (req,res)=>{
+    Tasks.find({}).then((task)=>{
+        res.send(task)
+    }).catch((e)=>{
+        res.status(404).send(e)
+    })
+
+})
+
+app.get('/tasks/:id', (req,res)=>{
+    const _id = req.params.id
+
+    
+    Tasks.findById(_id).then((task)=>{
+if (!task){
+    return res.status(404).send
+}
+res.send(task)
+res.send
+    }).catch((e)=>{
+        res.status(501).send(e)
+    })
+})
+
+
+
 app.listen(port, ()=>{
     console.log('Server is up on port ' + port)
 })
