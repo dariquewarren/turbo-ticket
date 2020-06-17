@@ -67,11 +67,21 @@ if (!user){
 }
 res.send(user)
     }catch(e){
-res.status(400).send()
+res.status(404).send()
     }
 })
 
-
+app.delete('/users/:id', async(req, res)=>{
+try{
+const user = await User.findByIdAndDelete(req.params.id)
+if(!user){
+ return   res.status(400).send()
+}
+res.send(user)
+}catch(e){
+res.status(500).send(e)
+}
+})
 
 app.post('/tasks', async (req, res)=>{
     const task = new Tasks(req.body)
@@ -111,19 +121,7 @@ res.status(201).send(task)
 })
 
 
-/*
-GOAL ALLOW FOR TASK UPDATES
 
-1.SETUP THE ROUTE HANDLER FOR UPDATING
-2.SEND ERROR IF UNKNOWN UPDATES
-3.ATTEMPT TO UPDATE THE TASK
-    -HANDLE TASK NOT FOUND
-    -HANDLE VALIDATION ERRORS
-    -HANDLE SUCCESS
-4.TEST YOUR WORK
-
-
-*/
 
 app.patch('/tasks/:id', async (req, res)=>{
  const updates = Object.keys(req.body)
@@ -145,6 +143,30 @@ if(!task){
 res.send(task)
     }catch(e){
         res.status(400).send(e)
+    }
+})
+
+
+/*
+GOAL ALLOW FOR REMOVAL OF TASKS
+1. SETUP THE ENDPOINT HANDLER
+2. ATTEMPT TO DELETE A TASK BY ID
+    -HQNDLE SUCCESS
+    -HANDLE TASK NOT FOUND
+    -HANDLE ERROR
+3. TEST YOUR WORK
+
+*/
+
+app.delete('/tasks/:id', async (req, res)=>{
+    try{
+const task = await Tasks.findByIdAndDelete(req.params.id)
+if(!task){
+  return  res.status(404).send()
+}
+res.send(task)
+    }catch(e){
+res.status(400).send(e)
     }
 })
 
