@@ -72,14 +72,6 @@ res.status(400).send()
 })
 
 
-/*
-
-GOAL: REFACTOR TASK ROUTES TO USE ASYNC/AWAIT
-
-1. REFACTOR TASK ROUTES TO USE ASYNC/AWAIT
-2. TEST ALL ROUTES
-
-*/
 
 app.post('/tasks', async (req, res)=>{
     const task = new Tasks(req.body)
@@ -104,12 +96,6 @@ res.status(200).send(task)
         res.status(500).send(e)
     }
     
-    // Tasks.find({}).then((task)=>{
-    //     res.send(task)
-    // }).catch((e)=>{
-    //     res.status(404).send(e)
-    // })
-
 })
 
 app.get('/tasks/:id', async (req,res)=>{
@@ -137,10 +123,30 @@ GOAL ALLOW FOR TASK UPDATES
 4.TEST YOUR WORK
 
 
-
 */
 
+app.patch('/tasks/:id', async (req, res)=>{
+ const updates = Object.keys(req.body)
+    const allowedUpdates = ['description', 'completed']
+const isValid = updates.every((update)=>{
+    return allowedUpdates.includes(update)
+})
+ if(!isValid){
+  return   res.status(404).send({error:'INVALID KEY/VALUE PAIR'})
 
+ }
+    try{
+
+const task = await Tasks.findByIdAndUpdate(req.params.id, req.body, { new:true, runValidators: true})
+
+if(!task){
+ return   res.status(404).send('NO TASK FOUND')
+}
+res.send(task)
+    }catch(e){
+        res.status(400).send(e)
+    }
+})
 
 app.listen(port, ()=>{
     console.log('Server is up on port ' + port)
