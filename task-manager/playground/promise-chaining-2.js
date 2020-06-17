@@ -15,11 +15,37 @@ const Task = require('../src/models/task')
 
 // "5ee8279a1124db1e7873376f"
 
-Task.findByIdAndDelete("5ee8279a1124db1e7873376f").then(()=>{
-return Task.find({completed: false})
-}).then((incompletes)=>{
-    console.log(incompletes)
-}).catch((e)=>{
+// Task.findByIdAndDelete("5ee8279a1124db1e7873376f").then(()=>{
+// return Task.find({completed: false})
+// }).then((incompletes)=>{
+//     console.log(incompletes)
+// }).catch((e)=>{
+//     console.log(e)
+// })
+
+
+
+
+
+/*
+
+GOAL USE ASYNC/AWAIT
+1. CREATE DELETETASKANDCOUNT AS AN ASNC FUNCTION
+    -ACCEPT ID OF TASK TO REMOVE
+2. USE AWAIT TO DELETE TASK AND COUNT INCOMPLETE TASKS
+3. RETURN THE COUNT
+4. CALL THE FUNCTION AND USE THEN/CATCH TO LOG RESULTS
+TEST YOUR WORK
+
+*/
+
+const deleteTaskAndCount = async (id)=>{
+const task = await Task.findByIdAndDelete(id)
+const count = await Task.countDocuments({completed: false})
+return count
+}
+
+deleteTaskAndCount("5ee79004f02e8b2d3883c7b8").then((count)=>{console.log(count)}).catch((e)=>{
     console.log(e)
 })
 
