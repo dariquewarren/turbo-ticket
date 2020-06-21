@@ -6,7 +6,7 @@ const geocode = (address, callback) => {
     request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback('Unable to connect to location services!', undefined)
-        } else if (body.features.length === 0) {
+        } else if (!body.features.length) {
             callback('Unable to find location. Try another search.', undefined)
         } else {
             callback(undefined, {
@@ -17,5 +17,5 @@ const geocode = (address, callback) => {
         }
     })
 }
-// pk.eyJ1IjoiZGFyaXF1ZXciLCJhIjoiY2thYnp4YWdyMDdodDMxbXcwOGsxcnA2ciJ9.XEueTGOscJKBKl1IZZiOiQ
+
 module.exports = geocode
