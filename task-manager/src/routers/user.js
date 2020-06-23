@@ -27,6 +27,15 @@ res.send({ user, token })
 })
 
 
+router.post('/users/logout', auth, (req, res)=>{
+    try{
+
+    }catch(e){
+
+    }
+})
+
+
  router.get('/users/me', auth, async (req, res)=>{
 res.send(req.user)
  
