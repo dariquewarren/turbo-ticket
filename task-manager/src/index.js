@@ -38,4 +38,13 @@ console.log(token)
 console.log(data)
 }
 
-myFunction()
+const pet = {
+    name: 'jack'
+}
+
+pet.toJSON = function () {
+    console.log(this)
+    return this
+}
+
+console.log(JSON.stringify(pet))
