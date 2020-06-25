@@ -28,23 +28,16 @@ app.listen(port, ()=>{
     console.log('Server is up on port ' + port)
 })
 
-const jwt = require('jsonwebtoken')
 
-const myFunction = async ()=>{
-const token = jwt.sign({_id:'12323'}, 'thisaseriesofcharacters', {expiresIn: '7 days'})
-const data = jwt.verify(token,'thisaseriesofcharacters')
-
-console.log(token)
-console.log(data)
+const Task = require('./models/task')
+const User = require('./models/user')
+const main = async ()=>{
+    // const task = await Task.findById('5ef40052df65f80a900bb7df')
+    // await task.populate('owner').execPopulate()
+    // console.log(task.owner)
+const user = await User.findById('5ef3fffbdf65f80a900bb7dd')
+ await user.populate('task').execPopulate()
+console.log(user)
 }
 
-const pet = {
-    name: 'jack'
-}
-
-pet.toJSON = function () {
-    console.log(this)
-    return this
-}
-
-console.log(JSON.stringify(pet))
+main()

@@ -1,5 +1,7 @@
 const validator = require('validator')
 const mongoose = require('mongoose')
+
+
 const taskSchema = mongoose.Schema({
     description: {
        type: String,
@@ -11,7 +13,12 @@ const taskSchema = mongoose.Schema({
        required: true,
        default: false
        
-       }
+       },
+   owner: {
+      type:  mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User'
+   }
       
    })
 

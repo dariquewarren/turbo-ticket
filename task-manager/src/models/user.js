@@ -53,6 +53,11 @@ throw new Error('Invalid Email')
         }]
 })
 
+userSchema.virtual('tasks', {
+    ref: 'task',
+    localField: '_id',
+    foreignField: 'owner'
+})
 
 userSchema.methods.toJSON = function() {
     const user = this
@@ -64,7 +69,7 @@ userSchema.methods.toJSON = function() {
 
     return userObject
 }
-
+ 
 
 userSchema.methods.generateAuthToken = async function () {
 const user = this
