@@ -2,7 +2,7 @@ const validator = require('validator')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
+const Tasks = require('./task')
 const userSchema = mongoose.Schema({
     name: {
 
@@ -54,7 +54,7 @@ throw new Error('Invalid Email')
 })
 
 userSchema.virtual('tasks', {
-    ref: 'task',
+    ref: 'Tasks',
     localField: '_id',
     foreignField: 'owner'
 })
@@ -95,6 +95,7 @@ return user
 }
 
 // hash plain text pword before saving
+
 userSchema.pre('save', async function (next){
 const user = this
 
@@ -103,6 +104,15 @@ user.password = await bcrypt.hash(user.password, 8)
 }
 
 
+next()
+})
+
+// Delete user tasks when user is removed
+
+userSchema.pre('remove', async (req, res, next)=>{
+const user = this
+await Tasks.deleteMany({owner: user._id})
+console.log(task)
 next()
 })
 
