@@ -35,7 +35,7 @@ app.engine( 'hbs', hbs({extname: '.hbs', layoutsDir: './views/pages', partialsDi
 app.get('/',(req, res )=>{
     // res.send('helloooooooooo')
     // res.sendFile(__dirname + '/main.hbs' )
-    res.render('../views/pages/main')
+    res.render('../views/pages/settings')
 })
 
 
