@@ -1,11 +1,32 @@
+const path = require('path')
 const express = require('express')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
+const hbs = require('express-handlebars')
+const app = express( )
 
-express.static('task-manager')
-router.use(express.static('public'))
+express.static(__dirname + '../public')
 
+
+
+app.engine( 'hbs', hbs( {
+    extname: '.hbs',
+    defaultView: 'default',
+    layoutsDir: __dirname + '/views/pages/',
+    partialsDir: __dirname + '/views/partials/'
+  }));
+
+
+app.set('view engine', 'hbs')
+
+
+
+
+router.get('/', function (req, res) {
+    
+    res.sendFile(path.join(__dirname, 'index1.html'));
+  })
 
 router.post('/users', async (req, res) => {
     const user = new User(req.body)

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node pubilic/src/index.js",
+    "dev": "nodemon public/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.18",
+    "node-fetch": "^2.6.0",
     "validator": "^10.11.0"
   },
   "devDependencies": {
