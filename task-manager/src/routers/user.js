@@ -6,8 +6,6 @@ const router = new express.Router()
 const hbs = require('express-handlebars')
 const app = express( )
 
-express.static(__dirname + '../public')
-
 
 
 app.engine( 'hbs', hbs( {
@@ -23,10 +21,6 @@ app.set('view engine', 'hbs')
 
 
 
-router.get('/', function (req, res) {
-    
-    res.sendFile(path.join(__dirname, 'index1.html'));
-  })
 
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
