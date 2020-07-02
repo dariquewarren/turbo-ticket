@@ -12,19 +12,31 @@ const path = require('path')
 const auth = require('./middleware/auth')
 const router = new express.Router()
 
-express.static(__dirname + '../src')
+express.static( __dirname +'./task-manager/src')
+express.static(  __dirname +'./task-manage/views')    
 
 
-app.get('/',(req, res )=>{
-    res.send('helloworld')
-})
 
+
+app.use(express.static(  __dirname +'./task-manager/src'))
+app.use(express.static(  __dirname +'./task-manager/views'))
 
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)
 
 
+
+
+app.set('view engine', 'hbs')
+app.engine( 'hbs', hbs({extname: '.hbs', layoutsDir: './views/pages', partialsDir: './views/partials'}));
+
+
+app.get('/',(req, res )=>{
+    // res.send('helloooooooooo')
+    // res.sendFile(__dirname + '/main.hbs' )
+    res.render('../views/pages/main')
+})
 
 
 app.listen(port, ()=>{
